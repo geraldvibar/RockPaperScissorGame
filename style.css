@@ -1,76 +1,146 @@
-*{
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+    color-scheme: dark;
+    font-family: 'DM Sans', sans-serif;
+    color: #f4f7fb;
+    background: #0c1018;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    --muted: #9099aa;
+    --accent: #b8f36b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: 32px 18px;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(57, 84, 118, .28), transparent 50%),
+        #0c1018;
 }
 
-body{
-    background-color: black;
-    font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.container{
-    background-color: rgb(164, 164, 164);
-    border-radius: 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-}
-
-.game-title{
-    color: white;
+.container {
+    width: min(100%, 560px);
+    padding: clamp(28px, 6vw, 52px);
+    border: 1px solid rgba(255, 255, 255, .09);
+    border-radius: 28px;
+    background: linear-gradient(145deg, rgba(27, 34, 47, .98), rgba(18, 23, 33, .98));
+    box-shadow: 0 28px 90px rgba(0, 0, 0, .42), inset 0 1px rgba(255, 255, 255, .04);
     text-align: center;
-    margin: 1rem;
 }
-.btn-group{
-    margin-bottom: 1rem;
-    width: 100%;
+
+.game-title {
+    margin: 0;
+    font: 700 clamp(2rem, 7vw, 3.1rem)/1.08 'Space Grotesk', sans-serif;
+    letter-spacing: -.055em;
+}
+
+.instructions { margin: 12px 0 0; color: var(--muted); font-size: .95rem; }
+
+.container::before {
+    content: 'THE CLASSIC DUEL';
+    display: block;
+    margin-bottom: 14px;
+    color: var(--accent);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+}
+
+.btn-group {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    
+    gap: clamp(12px, 3vw, 22px);
+    margin: 38px 0 30px;
 }
 
 .btn-group button {
-    border-radius: 100%;
-    background-color: black;
-    border: 3px solid white;
-    min-height: 15vh;
+    width: clamp(82px, 20vw, 112px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 26px;
+    background: #242c3b;
     cursor: pointer;
-    max-height: 15vh;
-    padding: 1rem;
-
-
-    
-}
-img{
-
-    max-height: 60px;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
 }
 
-.game-result{
-
-    margin:1rem;
+.btn-group button:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    background: #2d3747;
+    box-shadow: 0 12px 30px rgba(184, 243, 107, .12);
 }
 
-.game-result #result, #chosen,#scores{
-    color: white;
-    text-align: center;
-    font-weight:600;
-    margin-bottom: 1rem;
+.btn-group button:focus-visible, .game-result button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
 }
 
-.game-result button{
-    padding: 1rem 4rem;
-    font-size: 1.1rem;
+.btn-group img { display: block; width: 100%; max-width: 62px; height: auto; }
+
+.game-result {
+    padding: 24px 20px 20px;
+    border: 1px solid rgba(255, 255, 255, .07);
+    border-radius: 20px;
+    background: rgba(9, 13, 20, .48);
+}
+
+.game-result #result {
+    min-height: 1.5em;
+    margin: 0 0 14px;
+    color: var(--accent);
+    font: 700 1.45rem 'Space Grotesk', sans-serif;
+}
+
+.game-result #chosen {
+    min-height: 44px;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #dbe1eb;
     font-weight: 600;
-    color: white;
-    background-color: black;
-    border: 3px solid white;
-    border-radius: 10px;
+}
+
+.game-result #chosen img { width: 34px; height: 34px; object-fit: contain; }
+
+.game-result #scores {
+    margin: 0 0 22px;
+    color: var(--muted);
+    font-size: .9rem;
+    font-weight: 600;
+    letter-spacing: .025em;
+}
+
+.game-result button {
+    padding: 11px 20px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 11px;
+    background: transparent;
+    color: #c4cbd6;
+    font: 600 .88rem 'DM Sans', sans-serif;
     cursor: pointer;
+    transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+
+.game-result button:hover { border-color: #778397; background: #242c3b; color: #fff; }
+
+@media (max-width: 420px) {
+    .container { border-radius: 22px; }
+    .btn-group button { border-radius: 21px; padding: 15px; }
+    .game-result { padding-inline: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
